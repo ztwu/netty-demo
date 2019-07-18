@@ -47,6 +47,8 @@ public class NettyOioServer {
                     //.channelFactory(new ReflectiveChannelFactory<Channel>(NioSocketChannel.class))
                     .localAddress(new InetSocketAddress(port))
                     ////指定ChannelHandler
+                    //handler()和childHandler()的主要区别是，handler()是发生在初始化的时候，childHandler()是发生在客户端连接之后。
+                    //也就是说，如果需要在客户端连接前的请求进行handler处理，则需要配置handler(),如果是处理客户端连接之后的handler,则需要配置在childHandler()。
                     .childHandler(new ChannelInitializer<SocketChannel>() {//3
                         @Override
                         public void initChannel(SocketChannel ch)
